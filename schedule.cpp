@@ -1,0 +1,192 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t,c,n,k,p,m,last,curr1,curr2;
+    scanf("%d",&t);
+    while(t--)
+    {
+        c=0;
+        scanf("%d %d",&n,&p);
+        char a[n];
+        int b[n];
+            scanf("%s",a);
+          for(int i=0;i<n;i++)
+        {
+            b[i]=0;
+        }
+            for(k=0;k<n-1;k++)
+            {
+                if(a[k]==a[k+1])
+                {
+                  b[c]++;
+                }
+                else
+                {
+                    b[c]++;
+                    c++;
+                }
+            }
+        if(k==n-1&&a[n-1]==a[n-2])
+        {
+            b[c]++;
+        }
+        else if(k==n-1&&a[n-1]!=a[n-2])
+        {
+            b[c]++;
+        }
+        sort(b,b+(c+1));
+        if(p>=n/2)
+        {
+        for(int i=c;i>=0;i--)
+           {
+            if(p<=0)
+                break;
+            if(b[i]==1)
+                continue;
+                    b[i]=b[i]/2;
+                    p--;
+                    if(i>0)
+                    {
+                if(b[i]<=b[i-1])
+                  continue;
+            else
+            {
+                while(b[i]>b[i-1]&&p>0)
+                {
+                    b[i]=b[i]/2;
+                    p--;
+                }
+            }
+            }
+            else if(i==0&&p>0)
+            {
+                last=0;
+                while(p>0&&b[i]>1)
+                {
+                    if(b[i]%2==0)
+                    {
+                        curr1=b[i]/2;
+                        curr2=b[i]/2-1;
+                        p--;
+                    }
+                    else if(b[i]%2!=0)
+                    {
+                     curr1=b[i]/2;
+                     curr2=b[i]/2;
+                     p--;
+                    }
+                    if(curr1>=curr2)
+                    {
+                        if(curr1>=last)
+                        {
+                        b[i]=curr1;
+                        last=curr2;
+                        }
+                        else
+                        {
+                        b[i]=last;
+                       last=curr1;
+                        }
+                    }
+                    else if(curr1<curr2)
+                    {
+                    if(curr2>=last)
+                        {
+                        b[i]=curr2;
+                        last=curr1;
+                        }
+                        else
+                        {
+                        b[i]=last;
+                       last=curr2;
+                        }
+                    }
+                }
+            }
+        }
+          m=b[c];
+         for(int i=c;i>=0;i--)
+         {
+             if(b[i]>m)
+                m=b[i];
+         }
+         printf("%d\n",m);
+            continue;
+        }
+        for(int i=c;i>=0;i--)
+        {
+            if(p<=0)
+                break;
+            if(b[i]==1||b[i]==2)
+                continue;
+                    b[i]=b[i]/2;
+                    p--;
+                    if(i>0)
+                    {
+                if(b[i]<=b[i-1])
+                  continue;
+            else
+            {
+                while(b[i]>b[i-1]&&p>0)
+                {
+                    b[i]=b[i]/2;
+                    p--;
+                }
+            }
+            }
+            else if(i==0&&p>0)
+            {
+                last=0;
+                while(p>0&&b[i]>2)
+                {
+                    if(b[i]%2==0)
+                    {
+                        curr1=b[i]/2;
+                        curr2=b[i]/2-1;
+                        p--;
+                    }
+                    else if(b[i]%2!=0)
+                    {
+                     curr1=b[i]/2;
+                     curr2=b[i]/2;
+                     p--;
+                    }
+                    if(curr1>=curr2)
+                    {
+                        if(curr1>=last)
+                        {
+                        b[i]=curr1;
+                        last=curr2;
+                        }
+                        else
+                        {
+                        b[i]=last;
+                       last=curr1;
+                        }
+                    }
+                    else if(curr1<curr2)
+                    {
+                    if(curr2>=last)
+                        {
+                        b[i]=curr2;
+                        last=curr1;
+                        }
+                        else
+                        {
+                        b[i]=last;
+                       last=curr2;
+                        }
+                    }
+                }
+            }
+        }
+        m=b[c];
+         for(int i=c;i>=0;i--)
+         {
+             if(b[i]>m)
+                m=b[i];
+         }
+         printf("%d\n",m);
+    }
+}
